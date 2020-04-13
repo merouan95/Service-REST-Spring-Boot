@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>service REST STB</h1>
+	<h2>la liste des opérations gérées par le service REST.</h2>
+	<table border="1">
+  <tr>
+    <td>&nbsp;</td>
+    <td>URL</td>
+    <td>Méthode attendue</td>
+    <td>Résumé de l’opération (format attendu)</td>
+    <td>Résumé de l'opération (format de retour)</td>
+  </tr>
+  <tr>
+    <td>Page d’accueil</td>
+    <td>GET </td>
+    <td>http://localhost:9090/</td>
+    <td>aucune format n'est attendu</td>
+    <td>Format HTML, Affiche la page d’accueil du projet</td>
+  </tr>
+  <tr>
+    <td>Aide</td>
+    <td>GET</td>
+    <td>http://localhost:9090/help</td>
+    <td>aucune format n'est attendu</td>
+    <td>Format HTML, Affiche la liste des opérations gérées par le service REST</td>
+  </tr>
+  <tr>
+    <td>Liste des STB</td>
+    <td>GET</td>
+    <td>http://localhost:9090/resume</td>
+    <td>aucune format n'est attendu</td>
+    <td>Flux XML , Liste résumée des STB présentes dans la base.</td>
+  </tr>
+  <tr>
+    <td>Détail d’une STB</td>
+    <td>GET</td>
+    <td>http://localhost:9090/stb?id={id} </td>
+    <td>aucune format n'est attendu</td>
+    <td>Flux XML conforme au schéma XSD d'une STB</td>
+  </tr>
+   <tr>
+    <td>Détail d'une STB : Format HTML</td>
+    <td>GET</td>
+    <td>http://localhost:9090/htmlstb?id={id} </td>
+    <td>aucune format n'est attendu</td>
+    <td> 	Flux HTML conforme au schéma XSD d'une STB</td>
+  </tr>
+   <tr>
+    <td>Ajout d’une STB dans la base</td>
+    <td>PUT</td>
+    <td>http://localhost:9090/insert</td>
+    <td>entrez une body raw sous forme Xml </br> &lsaquo;STB xmlns=""&rsaquo; </br>
+	&lsaquo;title> nouveau titre &lsaquo;/title&rsaquo;</br>
+	&lsaquo;date> 2020-04-12 &lsaquo;/date&rsaquo;</br>
+	&lsaquo;desc> nouvelle description  &lsaquo;/desc&rsaquo;</br>
+&lsaquo;/STB &rsaquo;  </td> 
+    <td>Le flux XML retourné contient les informations suivantes :
+	<br/>
+- id → numéro d’identifiant attribué à la nouvelle STB enregistrée</br>
+- status → INSERTED</br>
+En cas d’échec de l’opération, seule la valeur de statut est retournée</br>
+- status → ERROR</td>
+  </tr>
+   <tr>
+    <td>Suppression d’un article</td>
+    <td>DELETE</td>
+    <td>http://localhost:9090/delete?id={id}</td>
+    <td>on ajoute un params sous le nom de id et on lui affecte une valeur <br/></td>
+    <td>Flux XML
+Si l’opération à réussi, retour des informations suivantes :</br>
+- id → numéro d’identifiant de la STB qui a été supprimée</br>
+- status → DELETED</br>
+Si l’opération à échoué (identifiant inconnu)</br>
+- status → ERROR</td>
+  </tr>
+   
+</table>
+</body>
+</html>
